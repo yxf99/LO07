@@ -1,0 +1,61 @@
+<?php
+
+function form_begin($class, $method, $action) {
+    echo ("\n<!-- ============================================== -->\n");
+    echo ("<!-- form_begin : $class $method $action) -->\n");
+    printf("<form class='%s' method='%s' action='%s'>\n", $class, $method, $action);
+}
+
+
+function form_input_text( $type, $name, $value) {
+    echo ("<input type='$type' name='$name' value='$value' >");
+
+}
+
+
+// =========================
+// form_select
+// =========================
+
+// Parametre $label    : permet un affichage (balise label)
+// Parametre $name     : attribut pour identifier le composant du formulaire
+// Parametre $multiple : si cet attribut n'est pas vide alors sélection multiple possible
+// Parametre $size     : attribut size de la balise select
+// Parametre $liste    : un liste d'options. Vous utiliserez un foreach pour générer les balises option
+
+function form_select($label, $name, $multiple, $size, $liste) {
+    echo '<label>'.$label.'</label>';
+    if($multiple == 'multiple'){
+        printf("<select name = '%s' multiple size='%s'class='form-control'/>\n",$name,$size
+            . "<optgroup>");
+    }else{
+        printf("<select name = '%s' size='%s'class='form-control'/>\n",$name,$size
+            . "<optgroup>");
+    }  
+    foreach ($liste as $value) {       
+             echo'<option value="'.$value.'">'.$value.'</option>';               
+    }
+    echo'</optgroup></select>';    
+}
+
+
+function form_input_reset($value) {
+    echo '<input type="reset" class="btn btn-primary" value="' . $value . '">';
+    echo "\n";
+}
+
+
+function form_input_submit($value) {
+    echo '<input type="submit" class="btn btn-primary" value="' . $value . '">';
+    echo "\n";
+}
+
+
+
+function form_end() {
+    echo "</form>";
+    echo "\n";
+}
+
+
+?>

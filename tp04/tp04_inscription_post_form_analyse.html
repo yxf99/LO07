@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="my_css.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div class="container">
+            <form method="POST" action="lo07_analyse_formulaire.php">
+                <div class='form-group'>
+                    <label for="nom">Nom?</label>
+                    <input type="text" class="form-control" id="nom" placeholder="Donnez votre nom" value='Mask' name='nom'>
+                </div>
+                <div class='form-group'>
+                    <label for="prenom">prénom?</label>
+                    <input type="text" class="form-control" id="prenom" placeholder="Donnez votre prénom" value='Elon' name="prenom">
+                </div>
+                <div class="form-group">
+                 <label for="email">Email</label>
+                 <input type="email" class="form-control" id="email" placeholder="Donnez votre Email" value='elon.musk@utt.fr' name="email">
+                </div>
+                <div class="form-group">
+                  <label for="ddn">Date de naissance?</label>
+                  <input type="text" class="form-control" id="ddn" placeholder="jj/mm/aaaa" value='1960-01-01' name="ddn">
+                </div>
+                
+                <label>Sexe?</label>
+
+                <div class="form-group">
+                    <label class="radio-inline">
+                      <input type="radio" value="M" name="sex" checked>Musculin
+                    </label>
+                    <label class="radio-inline">
+                       <input type="radio" value="F" name="sex">Féminin
+                    </label>
+                </div>
+                
+                <div class='form-group'>
+                    <label>Origine des étudiants</label>
+                    <select class="form-control" name="origine">
+                        <option>TC de l'UTT</option>
+                        <option>DUT INFO</option>
+                        <option>DUT GE2I</option>
+                        <option selected="selected">DUT STID</option>
+                        <option>DUT qutre</option>
+                        <option>Prépa scientifique</option>
+                        <option>Prépa B/L</option>
+                    </select>
+                </div>
+                
+                <div class='form-group'>
+                    <label>Validations?</label>
+                    <div class="checkbox">
+                        <label><input type="hidden" value="non" name="ST07" ></label>
+                        <label><input type="checkbox" value="oui" name="ST07" checked="checked">ST07</label>
+
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="hidden" value="non" name="ST09" ></label>
+                        <label><input type="checkbox" value="oui" name="ST09" >ST09</label>
+                        
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="hidden" value="non" name="ST10" ></label>
+                        <label><input type="checkbox" value="oui" disabled="disabled" name="ST10">ST10(désactivé)</label>                       
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="hidden" value="non" name="SE" ></label>
+                        <label><input type="checkbox" value="oui" name="SE" checked="checked">SE</label>
+                    </div>
+                </div>
+                
+                <label>Modules?</label>
+                <select name="modules[]" multiple size="10" class="form-control ">                   
+                    <optgroup label="CS">
+                       <option value="GL02" selected="selected">GL02</option>
+                       <option value="NF15">NF16</option>
+                       <option value="NF20" selected="selected">NF20</option>
+                    </optgroup>   
+                    <optgroup label="TM">
+                       <option value="IF09">IF09</option>
+                       <option value="IF14">IF14</option>
+                       <option value="LO02" selected="selected">LO02</option>
+                       <option value="NF21">NF21</option>
+                    </optgroup>                              
+                </select>
+                
+                <div class="form-group">
+                    <label>Informations complémentaires</label>
+                    <textarea class="form-control" rows="8" name="textarea" >Bonjour...</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit form</button>
+                
+            </form>
+        </div>
+    </body>
+</html>

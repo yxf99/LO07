@@ -1,0 +1,89 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2021年2月16日, 下午7:46:01
+    Author     : yangx
+*/
+h1{
+    color: navy;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+h2{
+    color: red;
+}
+
+a:visited{
+    color: orange;
+}
+
+a:hover{
+    background-color: greenyellow; 
+}
+ol{
+    color: chocolate;
+}
+
+.cs{
+    color: crimson;
+}
+.tm{
+    color: blueviolet;
+}
+li{
+    color: cornflowerblue;
+}
+#nom{
+    text-decoration: underline;
+}
+ol li{
+    color: gray;
+    text-transform: lowercase;
+}
+.gras{
+    color: dodgerblue;
+    font-weight: bolder;
+}
+#matiere{
+    color: salmon;
+    display: none;
+}
+.x{
+    color: black;
+    font-weight: normal;
+}
+tr{
+    color: blue;
+    font-weight: bolder;
+    background-color: rosybrown;
+}
+tr th{
+    background-color: white;
+}
+.white{
+    background-color: white;
+}
+ul li{
+    list-style-type: lower-greek;
+}
+#border{
+    border-left-style: solid;
+}
+#left{
+    float: left;
+    width:800px;
+    background-color: #cccccc
+}
+#right{
+/*    float: right;*/
+     margin-left: 810px;
+     background-color: #999999
+}
+#center{
+    text-align: center;
+}
