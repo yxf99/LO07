@@ -4,14 +4,6 @@
 require_once '../model/ModelVin.php';
 
 class ControllerVin {
- // --- page d'acceuil
- public static function caveAccueil() {
-  include 'config.php';
-  $vue = $root . '/app/view/viewCaveAccueil.php';
-  if (DEBUG)
-   echo ("ControllerVin : caveAccueil : vue = $vue");
-  require ($vue);
- }
 
  // --- Liste des vins
  public static function vinReadAll() {
