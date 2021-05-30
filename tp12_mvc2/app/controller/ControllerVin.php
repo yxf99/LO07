@@ -18,9 +18,9 @@ class ControllerVin {
     // Affiche un formulaire pour sélectionner un id qui existe
     public static function vinReadId($args)
     {
-        if (DEBUG) {
-            echo 'ControlerVin:vinReadId:begin</br>';
-        }
+//        if (DEBUG) {
+//            echo 'ControllerVin:vinReadId:begin</br>';
+//        }
         $results = ModelVin::getAllId();
         $target = $args['target'];
         if (DEBUG) {
