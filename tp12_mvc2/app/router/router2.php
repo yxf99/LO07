@@ -3,6 +3,7 @@
 <?php
 require ('../controller/ControllerVin.php');
 require ('../controller/ControllerProducteur.php');
+require ('../controller/ControllerRecolte.php');
 require ('../controller/ControllerCave.php');
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -42,6 +43,18 @@ switch ($action) {
  case "producteurDeleted" :
      ControllerProducteur::$action($args);
   break;
+
+ case "recolteReadAll" :
+ case "recolteReadOne" :
+ case "recolteReadId" :
+ case "recolteCreate" :
+ case "recolteCreated" :
+ case "recolteDeleted" :
+ case "recolteTable1";
+ case "recolteTable2";
+    // --- passage des arguments au controleur
+    ControllerRecolte::$action($args);
+    break;
 
 case "mesPropositions" :
      ControllerCave::$action($args);
