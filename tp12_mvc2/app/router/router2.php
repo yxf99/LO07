@@ -18,7 +18,7 @@ $action = htmlspecialchars($param["action"]);
 $action = $param['action'];
 
 // --- On supprime l'élément action de la structure
-unset($param['action']);
+$args = $param;
 
 // --- Liste des méthodes autorisées
 switch ($action) {
@@ -39,6 +39,7 @@ switch ($action) {
  case "producteurCreated" :
  case "producteurReadRegion" :
  case "producteurCountRegion" :
+ case "producteurDeleted" :
      ControllerProducteur::$action($args);
   break;
 

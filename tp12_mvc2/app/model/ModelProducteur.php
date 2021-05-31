@@ -26,11 +26,11 @@ class ModelProducteur {
   $this->nom = $nom;
  }
 
- function setprenom($prenom) {
+ function setPrenom($prenom) {
   $this->prenom = $prenom;
  }
 
- function setregion($region) {
+ function setRegion($region) {
   $this->region = $region;
  }
 
@@ -42,11 +42,11 @@ class ModelProducteur {
   return $this->nom;
  }
 
- function getprenom() {
+ function getPrenom() {
   return $this->prenom;
  }
 
- function getregion() {
+ function getRegion() {
   return $this->region;
  }
  
@@ -170,10 +170,31 @@ class ModelProducteur {
   return null;
  }
 
- public static function delete() {
-  echo ("ModelProducteur : delete() TODO ....");
-  return null;
- }
+ public static function delete($id)
+    {
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT * FROM recolte WHERE producteur_id = :id";
+            $testExistence = $database->prepare($query);
+            $testExistence->execute([
+                'id' => $id
+            ]);
+            if ($testExistence->rowCount() > 0) {
+                return null;
+            } else {
+                $results = ModelProducteur::getOne($id);
+                $query = "DELETE FROM producteur WHERE id = :id";
+                $statement = $database->prepare($query);
+                $statement->execute([
+                    'id' => $id
+                ]);
+                return $results[0];
+            }
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return -1; // Error exit code
+        }
+    }
 
 }
 ?>

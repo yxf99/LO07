@@ -141,20 +141,31 @@ class ModelVin {
   return null;
  }
 
- public static function delete($id) {
- try {
-   $database = Model::getInstance();
-   $query = "DELETE FROM vin where id = :id";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'id' => $id
-   ]);
-   return $id;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return -1;
-  }
- }
+ public static function delete($id)
+    {
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT * FROM recolte WHERE vin_id = :id";
+            $testExistence = $database->prepare($query);
+            $testExistence->execute([
+                    'id' => $id
+            ]);
+            if ($testExistence->rowCount() > 0) {
+                return null;
+            } else {
+                $results = ModelVin::getOne($id);
+                $query = "DELETE FROM vin WHERE id = :id";
+                $statement = $database->prepare($query);
+                $statement->execute([
+                        'id' => $id
+                ]);
+                return $results[0];
+            }
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return -1; // Error exit code
+        }
+    }
 
 }
 ?>

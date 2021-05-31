@@ -1,5 +1,4 @@
 <?php
-
 class ControllerCave{
     // --- page d'acceuil
  public static function caveAccueil() {

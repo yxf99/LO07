@@ -24,14 +24,22 @@ class ControllerProducteur {
  }
 
  // Affiche un formulaire pour sélectionner un id qui existe
- public static function producteurReadId() {
-  $results = ModelProducteur::getAllId();
+public static function producteurReadId($args)
+    {
+        if (DEBUG) {
+            echo 'ControllerProducteur:producteurReadId:begin</br>';
+        }
+        $results = ModelProducteur::getAllId();
+        $target = $args['target'];
+        if (DEBUG) {
+            echo ("ControllerProducteur：producteurReadId : target = $target</br>");
+        }
 
-  // ----- Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/producteur/viewId.php';
-  require ($vue);
- }
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/producteur/viewId1.php';
+        require($vue);
+    }
 
  // Affiche un producteur particulier (id)
  public static function producteurReadOne() {
@@ -82,6 +90,18 @@ class ControllerProducteur {
   $vue = $root . '/app/view/producteur/viewNombreProducteurParRegion.php';
   require ($vue);
  }
+ 
+ public static function producteurDeleted()
+    {
+        $producteur_id = $_GET['id'];
+        // Supprime la valeur
+        $results = ModelProducteur::delete($producteur_id);
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/producteur/viewDeleted.php';
+        require($vue);
+
+    }
 }
 ?>
 <!-- ----- fin ControllerProducteur -->

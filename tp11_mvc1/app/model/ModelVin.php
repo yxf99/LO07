@@ -141,9 +141,28 @@ class ModelVin {
   return null;
  }
 
- public static function delete() {
-  echo ("ModelVin : delete() TODO ....");
-  return null;
+ public static function delete($id) {
+  try {
+   $database = Model::getInstance();
+   $query = "SELECT vin_id FROM recolte WHERE vin_id = :id";
+   $statement = $database->prepare($query);
+   $statement->execute([
+     'id' => $id
+   ]);
+   if($statement == null){
+       $query1 = "delete from vin where id = :id";
+       $statement1 = $database->prepare($query1);
+       $statement1->execute([
+          'id' => $id
+        ]);
+   }else{
+       return null;
+   }
+   
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return -1;
+  }
  }
 
 }

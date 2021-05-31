@@ -26,11 +26,11 @@ class ModelProducteur {
   $this->nom = $nom;
  }
 
- function setprenom($prenom) {
+ function setPrenom($prenom) {
   $this->prenom = $prenom;
  }
 
- function setregion($region) {
+ function setRegion($region) {
   $this->region = $region;
  }
 
@@ -42,11 +42,11 @@ class ModelProducteur {
   return $this->nom;
  }
 
- function getprenom() {
+ function getPrenom() {
   return $this->prenom;
  }
 
- function getregion() {
+ function getRegion() {
   return $this->region;
  }
  
