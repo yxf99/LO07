@@ -13,7 +13,6 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     <!-- ===================================================== -->
     <?php
     if ($results) {
-        printf($results[0]);
         if($results[2] == 1){ 
             echo ("<h3>La nouvelle recolte a été ajouté</h3>");            
         }elseif($results[2] == 0){

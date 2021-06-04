@@ -41,70 +41,13 @@ class ModelRecolte {
   return $this->quantite;
  }
  
- 
-// retourne une liste des producteur_id
- public static function getAllId() {
-  try {
-   $database = Model::getInstance();
-   $query = "select producteur_id from recolte";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
-
- // retourne une liste des quantite
- public static function getAllquantite() {
-  try {
-   $database = Model::getInstance();
-   $query = "select DISTINCT quantite from recolte";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
- 
-  public static function countQuantite() {
-  try {
-   $database = Model::getInstance();
-   $query = "SELECT COUNT(quantite) FROM recolte GROUP BY quantite;";
-   $statement = $database->prepare($query);
-   $statement->execute(); 
-   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
- 
- public static function getMany($query) {
-  try {
-   $database = Model::getInstance();
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelRecolte");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
 
  public static function getAll() {
   try {
    $database = Model::getInstance();
-   $query = "select region, cru, annee, degre, nom, prenom, quantite from vin, producteur, recolte where recolte.vin_id and recolte.producteur_id = producteur.id order by region";
+   $query = "select vin.id, producteur.id as idd, region, cru, nom, prenom, quantite from vin, producteur, recolte where recolte.vin_id = vin.id and recolte.producteur_id = producteur.id order by vin.id, producteur_id";
    $statement = $database->prepare($query);
-   $statement->execute();  
+   $statement->execute(); 
    $datas = $statement->fetchAll(PDO::FETCH_ASSOC); 
    return array($datas);
   } catch (PDOException $e) {
@@ -131,21 +74,6 @@ class ModelRecolte {
   }
  }
  
- public static function getOne($producteur_id) {
-  try {
-   $database = Model::getInstance();
-   $query = "select * from recolte where producteur_id = :producteur_id";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'producteur_id' => $producteur_id
-   ]);
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelRecolte");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
 
  public static function insert($producteur_id,$vin_id,$quantite) {
   try {
@@ -184,39 +112,6 @@ class ModelRecolte {
    return -1;
   }
  }
-
- public static function update() {
-  echo ("ModelRecolte : update() TODO ....");
-  return null;
- }
-
-// public static function getAllIdVin() {
-//  try {
-//   $database = Model::getInstance();
-//   $query = "select id,cru,annee from vin";
-//   $statement = $database->prepare($query);
-//   $statement->execute();
-//   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-//   return $results;
-//  } catch (PDOException $e) {
-//   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-//   return NULL;
-//  }
-// }
- 
-//public static function getAllIdProducteur() {
-//  try {
-//   $database = Model::getInstance();
-//   $query = "select id,nom,pronom,region from producteur";
-//   $statement = $database->prepare($query);
-//   $statement->execute();
-//   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 1);
-//   return $results;
-//  } catch (PDOException $e) {
-//   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-//   return NULL;
-//  }
-// }
 
 }
 ?>
