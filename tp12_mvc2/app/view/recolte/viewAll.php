@@ -13,20 +13,29 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
 
     <table class = "table table-striped table-bordered">
       <thead>
-        <tr>
-          <th scope = "col">id</th>
-          <th scope = "col">cru</th>
-          <th scope = "col">année</th>
-          <th scope = "col">degré</th>
-        </tr>
+<!--        <tr>
+          <th scope = "col">producteur_id</th>
+          <th scope = "col">vin_id</th>
+          <th scope = "col">quantite</th>
+        </tr>-->
+          <?php
+          $cols = $results[0];
+          $datas = $results[1];
+         echo"helllllp";
+          echo '<tr>'; 
+          echo "<th scope = 'col'>";
+          printf($cols) ;
+          echo '</th>';       
+          echo '</tr>'; 
+          ?>
       </thead>
       <tbody>
           <?php
           // La liste des vins est dans une variable $results             
-          foreach ($results as $element) {
-           printf("<tr><td>%d</td><td>%s</td><td>%d</td><td>%.2f</td></tr>", $element->getId(), 
-             $element->getCru(), $element->getAnnee(), $element->getDegre());
-          }
+         
+           echo"<td>";
+           printf($datas);
+           echo"</td>";
           ?>
       </tbody>
     </table>

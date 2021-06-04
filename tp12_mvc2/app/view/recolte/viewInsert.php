@@ -13,11 +13,28 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     ?> 
 
     <form role="form" method='get' action='router2.php'>
-      <div class="form-group">
-        <input type="hidden" name='action' value='vinCreated'>        
-        <label for="id">cru : </label><input type="text" name='cru' size='75' value='Champagne de déconfinement'>                           
-        <label for="id">annee : </label><input type="number" name='annee' value='2021'>
-        <label for="id">degre : </label><input type="number" step='any' name='degre' value='17.24'>                
+      <div class="form-group">       
+        <input type="hidden" name='action' value='recolteCreated'> 
+        <label for="vin_id">Sélection d'un vin : </label> 
+        <select class="form-control" id='vin_id' name='vin_id' style="width: 200px">
+            <?php
+                   
+            for ($i = 0; $i < count($results1[0]); $i++) {
+               echo ("<option value=" .  $results1[0][$i]['id'] . ">".  $results1[0][$i]['id'] .":". $results1[0][$i]['cru'] .":". $results1[0][$i]['annee'] . "</option>") ;
+                }
+            ?>
+        </select>
+         
+        <label for="producteur_id">Sélection d'un producteur : </label> 
+        <select class="form-control" id='"producteur_id' name='"producteur_id' style="width: 200px">
+            <?php
+             for ($i = 0; $i < count($results1[1]); $i++) {
+               echo ("<option value=" .  $results1[1][$i]['id'] . ">".  $results1[1][$i]['id'] .":". $results1[1][$i]['nom'] .":". $results1[1][$i]['prenom'] .":". $results1[1][$i]['region'] . "</option>") ;
+                }
+            ?>
+        </select>
+        
+        <label for="id">quantite : </label><input type="number" step='any' name='quantite' value=''>                
       </div>
       <p/>
       <button class="btn btn-primary" type="submit">Go</button>

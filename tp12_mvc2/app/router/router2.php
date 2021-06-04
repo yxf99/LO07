@@ -50,8 +50,6 @@ switch ($action) {
  case "recolteCreate" :
  case "recolteCreated" :
  case "recolteDeleted" :
- case "recolteTable1";
- case "recolteTable2";
     // --- passage des arguments au controleur
     ControllerRecolte::$action($args);
     break;

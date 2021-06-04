@@ -13,16 +13,15 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     <!-- ===================================================== -->
     <?php
     if ($results) {
-     echo ("<h3>Le nouveau vin a été ajouté </h3>");
+     echo ("<h3>La recolte</h3>");
      echo("<ul>");
-     echo ("<li>id = " . $results . "</li>");
-     echo ("<li>cru = " . $_GET['cru'] . "</li>");
-     echo ("<li>annee = " . $_GET['annee'] . "</li>");
-     echo ("<li>degre = " . $_GET['degre'] . "</li>");
+     echo ("<li>vin_id = " . $results . "</li>");
+//     echo ("<li>prod_id = " .$_GET['producteur_id'] . "</li>");
+     echo ("<li>quantite = " . $_GET['quantite'] . "</li>");
      echo("</ul>");
     } else {
-     echo ("<h3>Problème d'insertion du Vin</h3>");
-     echo ("id = " . $_GET['cru']);
+     echo ("<h3>Problème d'insertion de la recolte</h3>");
+     echo ("id = " . $_GET['vin_id']);
     }
 
     echo("</div>");
