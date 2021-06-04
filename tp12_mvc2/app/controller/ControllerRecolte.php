@@ -55,7 +55,6 @@ public static function recolteReadId($args)
  // Affiche le formulaire de creation d'un recolte
  public static function recolteCreate() {
     $results1 = ModelRecolte::getAllVin();
-//     $results= ModelRecolte::getAllProducteur();
   // ----- Construction chemin de la vue
   include 'config.php';
   $vue = $root . '/app/view/recolte/viewInsert.php';

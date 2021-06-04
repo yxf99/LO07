@@ -18,25 +18,28 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
           <th scope = "col">vin_id</th>
           <th scope = "col">quantite</th>
         </tr>-->
+          <tr>
           <?php
-          $cols = $results[0];
-          $datas = $results[1];
-         echo"helllllp";
-          echo '<tr>'; 
-          echo "<th scope = 'col'>";
-          printf($cols) ;
-          echo '</th>';       
-          echo '</tr>'; 
-          ?>
+           for ($i = 0; $i < count($results[0]); $i++) {
+               echo ("<th scope = 'col'>".  $results[0][$i] . "</option>") ;
+                }
+            ?>
+         
+          </tr>
+          
+  
       </thead>
       <tbody>
           <?php
-          // La liste des vins est dans une variable $results             
-         
-           echo"<td>";
-           printf($datas);
-           echo"</td>";
-          ?>
+//           for ($i = 0; $i < count($results[1]); $i++) {
+//               echo ("<tr><td>".  $results[1][$i] . "</td></tr>") ;
+//                }
+                
+            foreach ($results[0] as $element) {
+           printf("<tr><td>%s</td><td>%s</td><td>%d</td><td>%.2f</td><td>%s</td><td>%s</td><td>%d</td></tr>", $element->getRegion(), 
+             $element->getCru(), $element->getAnnee(), $element->getDegre(),$element->getNom, $element->getPrennom(), $element->getQuantite());
+          }
+            ?>
       </tbody>
     </table>
   </div>

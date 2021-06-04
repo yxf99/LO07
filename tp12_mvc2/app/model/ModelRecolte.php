@@ -104,15 +104,9 @@ class ModelRecolte {
    $database = Model::getInstance();
    $query = "select region, cru, annee, degre, nom, prenom, quantite from vin, producteur, recolte where recolte.vin_id and recolte.producteur_id = producteur.id order by region";
    $statement = $database->prepare($query);
-   $statement->execute();
-   
-   $cols = array();
-   for($i = 0; $statement->ColumnCount(); $i++){
-       $cols[$i] = $statement->getColumnMeta($i)['name'];
-   }
-   $datas = $statement->fetchAll(PDO::FETCH_ASSOC);
-   
-   return array($cols,$datas);
+   $statement->execute();  
+   $datas = $statement->fetchAll(PDO::FETCH_ASSOC); 
+   return array($datas);
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;
@@ -137,23 +131,6 @@ class ModelRecolte {
   }
  }
  
-//  
-// public static function getAllProducteur() {
-//  try {
-//   $database = Model::getInstance();
-//   $query = "select id,nom,prenom,region from producteur";
-//   $statement = $database->prepare($query);
-//   $statement->execute();
-//   $id = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-//   $nom = $statement->fetchAll(PDO::FETCH_COLUMN, 1);
-//   $prenom = $statement->fetchAll(PDO::FETCH_COLUMN, 2);
-//   $region = $statement->fetchAll(PDO::FETCH_COLUMN, 3);
-//   return array($id,$nom,$prenom,$region);
-//  } catch (PDOException $e) {
-//   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-//   return NULL;
-//  }
-// }
  public static function getOne($producteur_id) {
   try {
    $database = Model::getInstance();
@@ -172,45 +149,36 @@ class ModelRecolte {
 
  public static function insert($producteur_id,$vin_id,$quantite) {
   try {
-   $database = Model::getInstance();
-    $query = "select * from recolte where producteur_id = :producteur_id and vin_id = :vin_id ";
-      $testExistence = $database->prepare($query);
-            $testExistence->execute([        
+                $database = Model::getInstance();
+                $query = "select * from recolte where producteur_id = :producteur_id and vin_id = :vin_id ";
+                $testExistence = $database->prepare($query);
+                $testExistence->execute([        
                'producteur_id' => $producteur_id,  
                 'vin_id' => $vin_id       
-    ]);
-             if ($testExistence->rowCount() == 0) {
-                // recherche de la valeur de la clé = max(producteur_id) + 1
-//                $query = "select max(producteur_id),max(vin_id) from recolte";
-//                $statement = $database->query($query);
-//                $tuple = $statement->fetch();
-//                $vin_id = $tuple['1'];
-//                $producteur_id = $tuple['0'];
-//                $vin_id++;
-//                $producteur_id++;
-//
-//                // ajout d'un nouveau tuple;
-//                $query = "insert into recolte value ( :producteur_id,:vin_id, :quantite)";
-//                $statement = $database->prepare($query);
-//                $statement->execute([
-//                  'producteur_id' => $producteur_id,
-//                  'vin_id' => $vin_id,
-//                  'quantite' => $quantite
-//                ]);
-//                return [$vin_id,$producteur_id,'La nouvelle recole a été ajouté'];
-                return null;
-            } else {
-                 $query = "update recolte set quantite = :quantite where producteur_id = :producteur_id and vin_id = :vin_id ";
+                ]);
+             if ($testExistence->rowCount() > 0) {
+               $query = "SET FOREIGN_KEY_CHECKS = 0;"
+                       . "update recolte set quantite = :quantite where producteur_id = :producteur_id and vin_id = :vin_id;"
+                       . "SET FOREIGN_KEY_CHECKS = 1; ";
                 $statement = $database->prepare($query);
                 $statement->execute([
                  'producteur_id' => $producteur_id,    
                   'vin_id' => $vin_id,              
+                  'quantite' => $quantite ]);
+                 return array($vin_id,$producteur_id,0);
+            } else {
+                // ajout d'un nouveau tuple;
+                $query = "SET FOREIGN_KEY_CHECKS = 0;"
+                        . "insert into recolte value ( :producteur_id, :vin_id, :quantite);"
+                        . "SET FOREIGN_KEY_CHECKS = 1;";
+                $statement = $database->prepare($query);
+                $statement->execute([
+                  'producteur_id' => $producteur_id,
+                  'vin_id' => $vin_id,
                   'quantite' => $quantite
                 ]);
-//                    return [$vin_id,$producteur_id,'La recole a été mise à jour'];
-                return $vin_id;
-            }
-   
+                return array($vin_id,$producteur_id,1);                
+            }              
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return -1;

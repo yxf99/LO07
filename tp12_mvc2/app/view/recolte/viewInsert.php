@@ -26,7 +26,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
         </select>
          
         <label for="producteur_id">Sélection d'un producteur : </label> 
-        <select class="form-control" id='"producteur_id' name='"producteur_id' style="width: 200px">
+        <select class="form-control" id='"producteur_id' name='producteur_id' style="width: 200px">
             <?php
              for ($i = 0; $i < count($results1[1]); $i++) {
                echo ("<option value=" .  $results1[1][$i]['id'] . ">".  $results1[1][$i]['id'] .":". $results1[1][$i]['nom'] .":". $results1[1][$i]['prenom'] .":". $results1[1][$i]['region'] . "</option>") ;
